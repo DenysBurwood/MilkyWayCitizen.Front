@@ -1,0 +1,10 @@
+<a routerLink="/">Home</a>
+@if (!isConnected())
+{
+    <button class="btn btn-outline-primary" routerLink="/login">Login</button>
+    <button class="btn btn-outline-secondary" routerLink="/register">Register</button>
+}
+@else
+{
+    <button class="btn btn-outline-primary" (click)="logout()">Logout</button>
+}

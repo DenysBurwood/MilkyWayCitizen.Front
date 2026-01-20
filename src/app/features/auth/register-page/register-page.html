@@ -1,0 +1,29 @@
+<p>register-page works!</p>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="userName">Pseudonyme : </label>
+        <input type="text" formControlName="userName" id="userName">
+    </div>
+        <div>
+        <label for="firstName">Prénom : </label>
+        <input type="text" formControlName="firstName" id="firstName">
+    </div>
+        <div>
+        <label for="lastName">Nom de famille : </label>
+        <input type="text" formControlName="lastName" id="lastName">
+    </div>
+        <div>
+        <label for="email">Courriel : </label>
+        <input type="email" formControlName="email" id="email">
+    </div>
+        <div>
+        <label for="password">Mot de passe : </label>
+        <input type="password" formControlName="password" id="password">
+    </div>
+        <div>
+        <label for="birthDate">Date de naissance : </label>
+        <input type="date" formControlName="birthDate" id="birthDate">
+    </div>
+    <button class="validation" type="submit">Soumettre</button>
+</form>

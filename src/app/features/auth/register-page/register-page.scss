@@ -1,0 +1,27 @@
+div
+{
+    //margin: 3px auto;
+    padding: 4px 7px;
+    border: 1px solid rebeccapurple;
+    background-color: lavenderblush;
+}
+.validation
+{
+    display: flexbox;
+    //max-width: 30%;
+    padding: 2px 8px;
+    margin: 3px auto;
+    border-radius: 8px;
+    background-color: lightpink;
+}
+.validation:hover
+{
+    background-color: hotpink;
+}
+form
+{
+    max-width: 60%;
+    margin: 5px auto;
+    display: flexbox;
+    align-self: auto;
+}
