@@ -1,0 +1,19 @@
+<p>news-index-page works!</p>
+<button routerLink="/news/create">Créer nouvel article</button>
+@if(newsList===null)
+{
+    <p>Loading or null list</p>
+}
+@else
+{
+    @for(news of newsList; track $index)
+    {
+        <div>
+            <p>Titre : {{ news.title }}</p>
+            <p>Description : {{ news.description }}</p>
+            <p>Étiquettes : {{ news.tags }}</p>
+            <p>id : {{ news.id }}</p>
+            <button (click)="goToNewsDetails(news.id)">Lire l'article</button>
+        </div>
+    }
+}

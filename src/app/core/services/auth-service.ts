@@ -3,9 +3,7 @@ import { computed, effect, inject, Injectable, Signal, signal } from '@angular/c
 import { jwtDecode } from 'jwt-decode';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '@env';
-import { UserRegisterForm } from '@core/models/user-register-form.models';
-import { UserLoginForm } from '@core/models/user-login-form.model';
-import { LoginResponse } from '@core/models/user-login-response.model';
+import { LoginResponse, UserLoginForm, UserRegisterForm } from '@core/models';
 
 @Injectable({
   providedIn: 'root',
