@@ -1,0 +1,31 @@
+<app-spinner />
+<p>Pseudonyme : {{ myProfileDetails?.userName }}</p>
+<p>Prénom : {{ myProfileDetails?.firstName }}</p>
+<p>Nom de famille : {{ myProfileDetails?.lastName }}</p>
+<p>Date de naissance : {{ myProfileDetails?.birthDate }}</p>
+<!-- <p>Liste des articles publiés : {{ myProfileDetails?.publishedNews }}</p> -->
+
+<table>
+    <thead>
+        <th class="hidden">Titre</th>
+        <th class="hidden">Valeur</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Pseudonyme</td>
+            <td>{{ myProfileDetails?.userName }}</td>
+        </tr>
+        <tr>
+            <td>Prénom</td>
+            <td>{{ myProfileDetails?.firstName }}</td>
+        </tr>
+        <tr>
+            <td>Nom de famille</td>
+            <td>{{ myProfileDetails?.lastName }}</td>
+        </tr>
+        <tr>
+            <td>Date de naissance</td>
+            <td>{{ myProfileDetails?.birthDate }}</td>
+        </tr>
+    </tbody>
+</table>

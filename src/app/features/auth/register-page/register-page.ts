@@ -45,7 +45,7 @@ export class RegisterPage
                 birthDate: this.registerForm.value.birthDate!
             }).then(() => 
             {
-                this._router.navigate(["/"]);
+                this._router.navigate(["/login"]);
             }).catch((err) => 
             {
                 console.error(err);

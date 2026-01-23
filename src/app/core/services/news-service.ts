@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { CreateNews } from '@core/models/news/news-create-form.models';
-import { NewsDetails } from '@core/models/news/news-details-form.models';
-import { indexNews } from '@core/models/news/news-index-form.models';
+import { CreateNews, indexNews, NewsDetails } from '@core/models';
 import { environment } from '@env';
 import { firstValueFrom } from 'rxjs';
 
@@ -23,6 +21,8 @@ export class NewsService
     }
     async createNews(form: CreateNews)
     {
+        console.log(form.publishDate);
+        
         return firstValueFrom(this._http.post<CreateNews>(environment.apiUrl + "News/add", form));
     }
 }

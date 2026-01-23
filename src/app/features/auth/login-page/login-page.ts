@@ -32,7 +32,8 @@ export class LoginPage
             {
                 userName: this.loginForm.value.userName!,
                 password: this.loginForm.value.password!,
-            })
+            });
+            this._router.navigate(["/"])
         }
     }
 }

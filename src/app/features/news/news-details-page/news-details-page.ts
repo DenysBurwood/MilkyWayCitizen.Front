@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NewsDetails } from '@core/models/news/news-details-form.models';
+import { NewsDetails } from '@core/models';
 import { NewsService } from '@core/services/news-service';
+import { Spinner } from "@components/animation/spinner/spinner";
 
 @Component({
   selector: 'app-news-details-page',
-  imports: [],
+  imports: [Spinner],
   templateUrl: './news-details-page.html',
   styleUrl: './news-details-page.scss',
 })

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreateNews } from '@core/models/news/news-create-form.models';
+import { CreateNews } from '@core/models';
 import { NewsService } from '@core/services/news-service';
 
 @Component({
@@ -19,7 +19,7 @@ export class NewsCreatePage
     title = new FormControl("", [Validators.required]);
     text = new FormControl("", [Validators.required]);
     description = new FormControl("", []);
-    publishTime = new FormControl(new Date(Date.now()), []);
+    publishTime = new FormControl(new Date(), []);
     userID = new FormControl(1, []);    //  placeholder, later we'll simply place the value of the ID of the user.
     pictures = new FormControl("", [Validators.required]);
     tags = new FormControl("", [Validators.required]);
@@ -46,7 +46,7 @@ export class NewsCreatePage
                 text:this.newsGroup.value.text!,
                 description:this.newsGroup.value.description!,
                 userID:this.newsGroup.value.userID!,
-                publishDate:this.newsGroup.value.publishTime!,
+                publishDate:new Date(Date.now()),
                 pictures:[this.newsGroup.value.pictures!],
                 tags:[this.newsGroup.value.tags!]
             };

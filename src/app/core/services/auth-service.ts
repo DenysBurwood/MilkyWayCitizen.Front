@@ -3,7 +3,7 @@ import { computed, effect, inject, Injectable, Signal, signal } from '@angular/c
 import { jwtDecode } from 'jwt-decode';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '@env';
-import { LoginResponse, UserLoginForm, UserRegisterForm } from '@core/models';
+import { LoginResponse, UserDetails, UserLoginForm, UserRegisterForm } from '@core/models';
 
 @Injectable({
   providedIn: 'root',
@@ -47,12 +47,18 @@ export class AuthService
     async login(form: UserLoginForm)
     {
         const response = await firstValueFrom(this._http.post<LoginResponse>(environment.apiUrl + "User/login", form));
-        console.log(response.token);
         this._token.set(response.token);
         
     }
     logout()
     {
         this._token.set(null);
+    }
+
+    async getOwnProfile()
+    {
+        const response = await firstValueFrom(this._http.get<UserDetails>(environment.apiUrl + "User/my_account"))
+        console.log(response);
+        return response;
     }
 }
