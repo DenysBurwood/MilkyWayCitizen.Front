@@ -1,3 +1,6 @@
+import { Roles } from "@core/enum/roles";
+import { AddressDetails } from "../address-details.models";
+
 export interface UserDetails
 {
     id: number,
@@ -6,5 +9,8 @@ export interface UserDetails
     lastName: string,
     email: string,
     birthDate: Date,
-    publishedNews: any
+    publishedNews: any,
+    role: Roles,
+    addressId: number,
+    address: AddressDetails
 }

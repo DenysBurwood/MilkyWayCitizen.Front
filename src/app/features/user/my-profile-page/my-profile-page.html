@@ -1,8 +1,4 @@
 <app-spinner />
-<p>Pseudonyme : {{ myProfileDetails?.userName }}</p>
-<p>Prénom : {{ myProfileDetails?.firstName }}</p>
-<p>Nom de famille : {{ myProfileDetails?.lastName }}</p>
-<p>Date de naissance : {{ myProfileDetails?.birthDate }}</p>
 <!-- <p>Liste des articles publiés : {{ myProfileDetails?.publishedNews }}</p> -->
 
 <table>
@@ -27,5 +23,32 @@
             <td>Date de naissance</td>
             <td>{{ myProfileDetails?.birthDate }}</td>
         </tr>
+            <tr>
+            <td>Courrier électronique</td>
+            <td>{{ myProfileDetails?.email }}</td>
+        </tr>
+        @if(!isAddressHidden)
+        {
+            <tr>
+                <td>Addresse</td>
+                <td>{{ myProfileDetails?.address?.streetName }}, {{ myProfileDetails?.address?.streetNumber }}</td>
+            </tr>
+            <tr>
+                <td>Ville</td>
+                <td>{{ myProfileDetails?.address?.city }}</td>
+            </tr>
+            <tr>
+                <td>Pays</td>
+                <td>{{ myProfileDetails?.address?.contry }}</td>
+            </tr>
+        }
     </tbody>
 </table>
+@if(!isAddressHidden)
+{
+    <button (click)="onAddressVisibility()">Cacher l'adresse</button>
+}
+@else 
+{
+    <button (click)="onAddressVisibility()">Afficher l'adresse</button>
+}

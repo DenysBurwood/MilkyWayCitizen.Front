@@ -4,6 +4,8 @@ import { jwtDecode } from 'jwt-decode';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '@env';
 import { LoginResponse, UserDetails, UserLoginForm, UserRegisterForm } from '@core/models';
+import { TokenResponse } from '@core/models/token-response.models';
+import { Roles } from '@core/enum/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,9 @@ export class AuthService
     
     private _token = signal<string | null>(null);
     token = this._token.asReadonly();
+
+    private _role = signal<Roles | null>(null);
+    role = this._role.asReadonly();
 
     isConnected: Signal<boolean> = computed(() => !!this.token());
 
@@ -30,12 +35,15 @@ export class AuthService
             if (token==null)
             {
                 localStorage.removeItem("token");
-                //this.role.set(null);
+                this._role.set(null);
             }
             else
             {
                 localStorage.setItem("token", token);
-                const tokenProp = jwtDecode(token)
+                const tokenProp = jwtDecode<TokenResponse>(token)
+                //console.log(tokenProp);
+                this._role.set(tokenProp['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
+                
             }
         })
     }
@@ -61,4 +69,8 @@ export class AuthService
         console.log(response);
         return response;
     }
+    // async getFullProfile()
+    // {
+    //     const response = await firstValueFrom(this._http.get<)
+    // }
 }

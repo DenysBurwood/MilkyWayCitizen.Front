@@ -14,8 +14,14 @@ export class MyProfilePage implements OnInit
     private readonly _auth = inject(AuthService);
     //private readonly _user = inject(UserS)
     myProfileDetails: UserDetails|null = null;
+    isAddressHidden: boolean = true;
     
     async ngOnInit(): Promise<void> {
         this.myProfileDetails = await this._auth.getOwnProfile();
+    }
+
+    onAddressVisibility()
+    {
+        this.isAddressHidden = !this.isAddressHidden;
     }
 }

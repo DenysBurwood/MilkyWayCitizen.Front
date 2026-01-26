@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { isModeratorOrAdminGuard } from '@core/guard/is-moderator-or-admin-guard';
 
 export const routes: Routes = [
     {
@@ -7,6 +8,7 @@ export const routes: Routes = [
     },
     {
         path: "create",
+        canActivate: [isModeratorOrAdminGuard],
         loadComponent: () => import("./news-create-page/news-create-page").then(y => y.NewsCreatePage),
     },
     {

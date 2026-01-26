@@ -1,5 +1,8 @@
 <app-spinner />
-<button routerLink="/news/create">Créer nouvel article</button>
+@if(hasModeratorRights)
+{
+    <button routerLink="/news/create">Créer nouvel article</button>
+}
 @if(newsList===null)
 {
     <p>Loading or null list</p>
