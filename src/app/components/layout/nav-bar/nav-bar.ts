@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '@core/services/auth-service';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-nav-bar',
-  imports: [RouterLink],
+  imports: [RouterLink, ButtonModule],
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.scss',
 })

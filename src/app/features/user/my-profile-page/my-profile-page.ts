@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserDetails } from '@core/models';
 import { AuthService } from '@core/services/auth-service';
 import { Spinner } from "@components/animation/spinner/spinner";
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-my-profile-page',
-  imports: [Spinner],
+  imports: [Spinner, TableModule],
   templateUrl: './my-profile-page.html',
   styleUrl: './my-profile-page.scss',
 })

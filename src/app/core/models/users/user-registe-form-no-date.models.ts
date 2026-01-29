@@ -1,11 +1,11 @@
-export interface UserRegisterForm 
+export interface UserRegisterFormNoDate
 {
     userName: string;
     firstName: string;
     lastName: string;
     email: string;
     password: string;
-    birthDate: Date;
+    birthDate: string;
     streetName: string;
     streetNumber: number;
     city: string;

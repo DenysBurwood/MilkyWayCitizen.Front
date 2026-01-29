@@ -4,7 +4,6 @@ export interface CreateNews
     text: string;
     description: string;
     publishDate: Date;
-    userID: number;
     pictures: string[];
     tags: string[];
 }

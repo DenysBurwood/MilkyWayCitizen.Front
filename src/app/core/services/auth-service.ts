@@ -1,11 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, Signal, signal } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, tap } from 'rxjs';
 import { environment } from '@env';
-import { LoginResponse, UserDetails, UserLoginForm, UserRegisterForm } from '@core/models';
-import { TokenResponse } from '@core/models/token-response.models';
+import {    LoginResponse, 
+            TokenResponse, 
+            UserDetails, 
+            UserLoginForm, 
+            UserRegisterForm } from '@core/models';
 import { Roles } from '@core/enum/roles';
+import { UserRegisterFormNoDate } from '@core/models/users/user-registe-form-no-date.models';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +53,7 @@ export class AuthService
     }
     register(form: UserRegisterForm)
     {
-        return firstValueFrom(this._http.post<void>(environment.apiUrl + "User/register", form));
+        return this._http.post<void>(environment.apiUrl + "User/register", form).pipe(tap()).subscribe();
     }
 
     async login(form: UserLoginForm)
@@ -66,7 +70,6 @@ export class AuthService
     async getOwnProfile()
     {
         const response = await firstValueFrom(this._http.get<UserDetails>(environment.apiUrl + "User/my_account"))
-        console.log(response);
         return response;
     }
     // async getFullProfile()

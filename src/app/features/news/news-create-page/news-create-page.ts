@@ -19,8 +19,7 @@ export class NewsCreatePage
     title = new FormControl("", [Validators.required]);
     text = new FormControl("", [Validators.required]);
     description = new FormControl("", []);
-    publishTime = new FormControl(new Date(), []);
-    userID = new FormControl(1, []);    //  placeholder, later we'll simply place the value of the ID of the user.
+    publishTime = new FormControl(new Date(Date.now()), [Validators.required]);
     pictures = new FormControl("", [Validators.required]);
     tags = new FormControl("", [Validators.required]);
 
@@ -30,7 +29,6 @@ export class NewsCreatePage
         text: this.text,
         description: this.description,
         publishTime: this.publishTime,
-        userID: this.userID,
         pictures: this.pictures,
         tags: this.tags
     });    
@@ -45,13 +43,14 @@ export class NewsCreatePage
                 title:this.newsGroup.value.title!,
                 text:this.newsGroup.value.text!,
                 description:this.newsGroup.value.description!,
-                userID:this.newsGroup.value.userID!,
-                publishDate:new Date(Date.now()),
+                publishDate:this.newsGroup.value.publishTime!,
                 pictures:[this.newsGroup.value.pictures!],
                 tags:[this.newsGroup.value.tags!]
             };
-            await this._news.createNews(newArticle);
+            this._news.createNews(newArticle).then(() => console.log(newArticle.publishDate));
             this._router.navigate(["/", "news"]);
+            console.log(newArticle.publishDate);
+            
         }
     }
 }

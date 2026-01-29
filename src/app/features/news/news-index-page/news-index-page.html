@@ -9,7 +9,7 @@
 }
 @else
 {
-    @for(news of newsList; track $index)
+    <!-- @for(news of newsList; track $index)
     {
         <div>
             <p>Titre : {{ news.title }}</p>
@@ -18,5 +18,27 @@
             <p>id : {{ news.id }}</p>
             <button (click)="goToNewsDetails(news.id)">Lire l'article</button>
         </div>
-    }
+    } -->
+
+    <div class="card">
+        <p-table [value]="newsList" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template #header>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Étiquettes</th>
+                    <th>Détails</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-news>
+                <tr>
+                    <td>{{ news.title }}</td>
+                    <td>{{ news.description }}</td>
+                    <td>{{ news.tags }}</td>
+                    <td><button (click)="goToNewsDetails(news.id)">Lire l'article</button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
 }
