@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@core/services/auth-service';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddon } from 'primeng/inputgroupaddon';
 import { PasswordModule } from "primeng/password";
 import { DatePickerModule } from 'primeng/datepicker';
+import { MessageModule } from "primeng/message";
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, InputGroup, FormsModule, InputGroupAddon, PasswordModule, DatePickerModule],
+  imports: [ReactiveFormsModule, InputGroup, FormsModule, InputGroupAddon, PasswordModule, DatePickerModule, RouterLink, MessageModule, InputTextModule],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
@@ -61,17 +63,24 @@ export class RegisterPage
                 country: this.registerForm.value.country!,
             })/*.then(() => 
             {
-                this._router.navigate(["/"]);
-            }).catch((err) => 
-            {
-                console.error(err);
-
-            })*/
+                }).catch((err) => 
+                {
+                    console.error(err);
+                    
+                    })*/
+           this._router.navigate(["/", "login"]);
             
             
             
         }
-        console.log(this.registerForm.value.birthDate?.toJSON());
+        //console.log(this.registerForm.value.birthDate?.toJSON());
+    }
+
+    isInvalid(controlName: string)
+    {
+        const control = this.registerForm.get(controlName);
+        //console.log(control?.invalid);
         
+        return control?.invalid && (control.touched/* || this.formSubmitted*/);
     }
 }

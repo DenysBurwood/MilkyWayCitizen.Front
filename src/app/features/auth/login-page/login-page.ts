@@ -1,11 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@core/services/auth-service';
+import { ButtonModule } from 'primeng/button';
+import { InputGroup } from "primeng/inputgroup";
+import { InputGroupAddon } from "primeng/inputgroupaddon";
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from "primeng/password";
+import { Message } from "primeng/message";
 
 @Component({
   selector: 'app-login-page',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputGroup, InputGroupAddon, RouterLink, ButtonModule, InputTextModule, Message, PasswordModule],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss',
 })
@@ -35,5 +41,13 @@ export class LoginPage
             });
             this._router.navigate(["/"])
         }
+    }
+
+    isInvalid(controlName: string)
+    {
+        const control = this.loginForm.get(controlName);
+        //console.log(control?.invalid);
+        
+        return control?.invalid && (control.touched/* || this.formSubmitted*/);
     }
 }

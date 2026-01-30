@@ -2,11 +2,15 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateNews } from '@core/models';
+import { MessageModule } from 'primeng/message';
 import { NewsService } from '@core/services/news-service';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-news-create-page',
-  imports: [ReactiveFormsModule],
+  imports: [MessageModule, ButtonModule, InputTextModule, ReactiveFormsModule, ToastModule],
   templateUrl: './news-create-page.html',
   styleUrl: './news-create-page.scss',
 })
@@ -49,8 +53,14 @@ export class NewsCreatePage
             };
             this._news.createNews(newArticle).then(() => console.log(newArticle.publishDate));
             this._router.navigate(["/", "news"]);
-            console.log(newArticle.publishDate);
+            //console.log(newArticle.publishDate);
             
         }
+
+        
+    }
+    isInvalid(controlName: string) {
+        const control = this.newsGroup.get(controlName);
+        return control?.invalid && (control.touched/* || this.formSubmitted*/);
     }
 }

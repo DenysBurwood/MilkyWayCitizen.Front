@@ -1,4 +1,4 @@
-<p>news-create-page works!</p>
+<!-- <p>news-create-page works!</p>
 
 <form [formGroup]="newsGroup" (ngSubmit)="onSubmit()">
     <div>
@@ -22,4 +22,44 @@
         <input type="text" formControlName="tags" id="tags">
     </div>
     <button>Soumettre</button>
-</form>
+</form> -->
+<p>Text préambule</p>
+
+  <!-- <p-toast /> -->
+        <div class="card flex justify-center">
+            <form [formGroup]="newsGroup" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
+                <div class="flex flex-col gap-1">
+                    <input pInputText type="text" id="title" placeholder="Titre" formControlName="title" [invalid]="isInvalid('title')" />
+                    @if (isInvalid('title')) {
+                        <p-message severity="error" size="small" variant="simple">Title is required.</p-message>
+                    }
+                </div>
+                <div class="flex flex-col gap-1">
+                    <input pInputText type="text" id="description" placeholder="Résumé" formControlName="description" [invalid]="isInvalid('description')" />
+                    @if (isInvalid('description')) {
+                        @if (newsGroup.get('description')?.errors?.['required']) {
+                            <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+                        }
+                        <!-- @if (exampleForm.get('email')?.errors?.['email']) {
+                            <p-message severity="error" size="small" variant="simple">Please enter a valid email.</p-message>
+                        } -->
+                    }
+                </div>
+                    <div class="flex flex-col gap-1">
+                    <textarea type="text" rows="5" cols="30" pInputTextarea id="text" placeholder="Texte de l'article" formControlName="text"></textarea>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <input pInputText type="text" id="pictures" placeholder="chemin de l'image" formControlName="pictures" [invalid]="isInvalid('pictures')" />
+                    @if (isInvalid('pictures')) {
+                        <p-message severity="error" size="small" variant="simple">Title is required.</p-message>
+                    }
+                </div>
+                <div class="flex flex-col gap-1">
+                    <input pInputText type="text" id="tags" placeholder="Étiquettes" formControlName="tags" [invalid]="isInvalid('tags')" />
+                    @if (isInvalid('tags')) {
+                        <p-message severity="error" size="small" variant="simple">Title is required.</p-message>
+                    }
+                </div>
+                <button pButton severity="secondary" type="submit"><span pButtonLabel>Submit</span></button>
+            </form>
+        </div>

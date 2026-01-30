@@ -1,5 +1,7 @@
 <app-spinner />
-<p>{{ articleDetail?.title }}</p>
-<p>Photographie : {{ articleDetail?.pictures }}</p>
-<p>Écrit par : {{ articleDetail?.authorName }} le {{ articleDetail?.publishTime }}</p>
-<p>{{ articleDetail?.text }}</p>
+<div class="card flex justify-center">
+    <h3>{{ articleDetail?.title }}</h3>
+    <p>Photographie : {{ articleDetail?.pictures }}</p>
+    <p>Écrit par : {{ articleDetail?.authorName }} le {{ articleDetail?.publishTime }}</p>
+    <p>{{ articleDetail?.text }}</p>
+</div>

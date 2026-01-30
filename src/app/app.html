@@ -1,5 +1,21 @@
 <header>
   <h1>Milkyway citizen townhall</h1>
-  <app-nav-bar/>
 </header>
-<router-outlet />
+<app-nav-bar/>
+<main>
+  <!-- <app-starry-background>
+  </app-starry-background> -->
+   <om-starry-sky
+      [shootingStarsConfig]="{ minDelay: 500, maxDelay: 3000 }"
+      [starsBackgroundConfig]="{ starDensity: 0.0015 }"
+    >
+        <div class="content">
+            <!-- <h2>
+                Starry sky
+              </h2> -->
+              <router-outlet></router-outlet>
+        </div>
+    </om-starry-sky>
+
+</main>
+<footer>Look up for eachother!</footer>

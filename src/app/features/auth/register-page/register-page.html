@@ -1,64 +1,76 @@
 <p>register-page works!</p>
 
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-        <p-inputgroup>
-            <p-inputgroup-addon>
-                Pseudonyme : 
-            </p-inputgroup-addon>
-            <input pInputText formControlName="userName" placeholder="Username" />
-        </p-inputgroup>
-    </div>
+<div class="card flex justify-center">
+    <h3>Inscrivez-vous sur notre site en remplissant ce formulaire.</h3>
+    <p>Cliquez <a routerLink="/login">ici</a> si vous êtes déjà inscrits.</p>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" style="min-width: 350px;">
+        <div>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    Pseudonyme : 
+                </p-inputgroup-addon>
+                <input pInputText type="text" formControlName="userName" [invalid]="isInvalid('userName')" />
+            </p-inputgroup>
+            @if (isInvalid('title')) 
+            {
+                <p-message severity="error" size="small" variant="simple">Un pseudonyme est requis.</p-message>
+                <h3>text</h3>
+            }
+        </div>
         <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Prénom : 
             </p-inputgroup-addon>
-            <input pInputText formControlName="firstName" placeholder="Prénom" />
+            <input pInputText formControlName="firstName" [invalid]="isInvalid('firstName')" />
+            @if (isInvalid('title')) 
+                {
+                    <p-message severity="error" size="small" variant="simple">Un prénom est requis.</p-message>
+                }
         </p-inputgroup>
     </div>
-        <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Nom de famille : 
             </p-inputgroup-addon>
-            <input pInputText formControlName="lastName" placeholder="Nom" />
+            <input pInputText formControlName="lastName" [invalid]="isInvalid('lastName')" />
         </p-inputgroup>
     </div>
-        <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Courrier électronique : 
             </p-inputgroup-addon>
-            <input pInputText formControlName="email" placeholder="test@test.be" />
+            <input pInputText formControlName="email" placeholder="test@test.be" [invalid]="isInvalid('email')" />
         </p-inputgroup>
     </div>
-        <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Mot de passe : 
             </p-inputgroup-addon>
-            <p-password pInputPassword [feedback]="false" autocomplete="off" formControlName="password" placeholder="***" />
+            <p-password pInputPassword [feedback]="false" autocomplete="off" formControlName="password" [invalid]="isInvalid('password')" />
         </p-inputgroup>
     </div>
         <div>
-        <p-inputgroup>
+            <p-inputgroup>
             <p-inputgroup-addon>
                 Date de naissance : 
             </p-inputgroup-addon>
             <p-date-picker dateFormat="d.m.yy"  formControlName="birthDate" />
         </p-inputgroup>
     </div>
-
-            <div>
+    
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Nom de rue : 
             </p-inputgroup-addon>
-            <input  formControlName="streetName" placeholder="Rue de machin" />
+            <input pInputText formControlName="streetName" placeholder="Rue de machin" [invalid]="isInvalid('streetName')" />
         </p-inputgroup>
     </div>
-            <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Numéro de rue : 
@@ -66,24 +78,25 @@
             <input formControlName="streetNumber" placeholder="1" />
         </p-inputgroup>
     </div>
-                <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Ville : 
             </p-inputgroup-addon>
-            <input formControlName="city" placeholder="Ville" />
+            <input pInputText formControlName="city" placeholder="Ville" [invalid]="isInvalid('city')" />
         </p-inputgroup>
     </div>
-                <div>
+    <div>
         <p-inputgroup>
             <p-inputgroup-addon>
                 Pays : 
             </p-inputgroup-addon>
-            <input formControlName="country" placeholder="Pays" />
+            <input pInputText formControlName="country" placeholder="Pays" [invalid]="isInvalid('country')" />
         </p-inputgroup>
     </div>
     <button class="validation" type="submit">Soumettre</button>
 </form>
+</div>
 
 <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div>

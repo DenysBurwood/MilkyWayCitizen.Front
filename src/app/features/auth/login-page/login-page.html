@@ -1,5 +1,5 @@
 <p>login-page works!</p>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div>
         <label for="userName">Pseudonyme : </label>
         <input type="text" formControlName="userName" id="userName">
@@ -9,4 +9,35 @@
         <input type="password" formControlName="password" id="password">
     </div>
     <button type="submit">Soumettre</button>
+</form> -->
+
+<div class="card flex justify-center form-display">   
+    <h3>Connectez-vous pour profiter de notre site au maximum !</h3>
+    <p>Cliquez <a routerLink="/register">ici</a> si vous n'êtes pas encore inscrits.</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="min-width: 350px;">
+        <div>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                Pseudonyme : 
+            </p-inputgroup-addon>
+            <input pInputText formControlName="userName" placeholder="Username" [invalid]="isInvalid('userName')" />
+            @if (isInvalid('title')) 
+                {
+                    <p-message severity="error" size="small" variant="simple">Un prénom est requis.</p-message>
+                }
+        </p-inputgroup>
+    </div>
+    <div>
+        <p-inputgroup>
+            <p-inputgroup-addon>
+                Mot de passe : 
+            </p-inputgroup-addon>
+            <p-password pInputPassword [feedback]="false" autocomplete="off" formControlName="password" placeholder="Mot de passe" [invalid]="isInvalid('password')" />
+        </p-inputgroup>
+    </div>
+    <button pButton type="submit">
+        <!-- <i class="pi pi-check" pButtonIcon></i> -->
+        <span class="pi pi-check" pButtonLabel>Valider</span>
+    </button>
 </form>
+</div>
