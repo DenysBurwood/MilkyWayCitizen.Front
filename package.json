@@ -28,7 +28,6 @@
     "@angular/forms": "^21.1.2",
     "@angular/platform-browser": "^21.1.2",
     "@angular/router": "^21.1.2",
-    "@ng-bootstrap/ng-bootstrap": "^19.0.1",
     "@omnedia/ngx-starry-sky": "^4.0.1",
     "@popperjs/core": "^2.11.8",
     "@primeuix/themes": "^2.0.3",
