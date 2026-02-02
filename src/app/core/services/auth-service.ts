@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, effect, inject, Injectable, Signal, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, OnChanges, Signal, signal, SimpleChanges } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { firstValueFrom, tap } from 'rxjs';
 import { environment } from '@env';
@@ -14,18 +14,18 @@ import { UserRegisterFormNoDate } from '@core/models/users/user-registe-form-no-
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService 
+export class AuthService
 {
     private readonly _http = inject(HttpClient);
     
     private _token = signal<string | null>(null);
     token = this._token.asReadonly();
-
+    
     private _role = signal<Roles | null>(null);
     role = this._role.asReadonly();
-
+    
     isConnected: Signal<boolean> = computed(() => !!this.token());
-
+    
     constructor()
     {
         const tokenStr = localStorage.getItem("token");
@@ -45,6 +45,7 @@ export class AuthService
             {
                 localStorage.setItem("token", token);
                 const tokenProp = jwtDecode<TokenResponse>(token)
+                
                 //console.log(tokenProp);
                 this._role.set(tokenProp['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
                 
@@ -60,6 +61,9 @@ export class AuthService
     {
         const response = await firstValueFrom(this._http.post<LoginResponse>(environment.apiUrl + "User/login", form));
         this._token.set(response.token);
+
+        //const temp = this._http.post<LoginResponse>(environment.apiUrl + "User/login", form).pipe(tap()).subscribe();
+        //this._token.set(temp().)
         
     }
     logout()

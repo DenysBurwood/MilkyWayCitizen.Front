@@ -13,6 +13,7 @@ export class NavBar
 {
     private readonly _auth = inject(AuthService);
     private readonly _router = inject(Router);
+    picture: string = "assets/icons/galaxy-svgrepo-com.svg";
     isConnected()
     {
         return this._auth.isConnected();

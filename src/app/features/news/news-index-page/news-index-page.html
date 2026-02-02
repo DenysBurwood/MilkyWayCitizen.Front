@@ -19,7 +19,10 @@
             <button (click)="goToNewsDetails(news.id)">Lire l'article</button>
         </div>
     } -->
-
+    <div>
+        <input [(ngModel)]="newPageSize" type="number" id="PS">
+        <p-button (onClick)="changePageSize(newPageSize)">Valider</p-button>
+    </div>
     <div class="card form">
         <p-table [value]="newsList" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template #header>
@@ -40,7 +43,7 @@
                         <div class="card flex justify-center">
                             <button pButton>
                                 <i class="pi pi-check" pButtonIcon></i>
-                                <span pButtonLabel>Save</span>
+                                <span pButtonLabel (click)="goToNewsDetails(news.id)">Lire l'article</span>
                             </button>
                         </div>
                     </td>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-//import { NgxStarrySkyComponent } from '@omnedia/ngx-starry-sky';
+import { NgxStarrySkyComponent } from '@omnedia/ngx-starry-sky';
 
 @Component({
   selector: 'app-starry-background',
-  imports: [/*NgxStarrySkyComponent, RouterOutlet*/],
+  imports: [NgxStarrySkyComponent, RouterOutlet],
   templateUrl: './starry-background.html',
   styleUrl: './starry-background.scss',
 })

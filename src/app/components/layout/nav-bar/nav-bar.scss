@@ -15,13 +15,19 @@ p-button
 }
 .nav-bar
 {
-    background-image: url("../../../../../public/assets/icons/galaxy-svgrepo-com.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
+    // background-image: url("../../../../../public/assets/icons/galaxy-svgrepo-com.svg");
+    // background-size: contain;
+    // background-repeat: no-repeat;
     margin: 14px 0;
     background-color: rebeccapurple;
-    padding: 7px 0;
+    padding: 4px 0;
     
+}
+img
+{
+    height: 30px;
+    display: flexbox;
+    align-self: center;
 }
 // .home
 // {
