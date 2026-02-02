@@ -5,10 +5,11 @@ import { Spinner } from "@components/animation/spinner/spinner";
 import { AuthService, NewsService } from '@core/services';
 import { TableModule } from "primeng/table";
 import { HttpResourceRef } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-news-index-page',
-  imports: [RouterLink, Spinner, TableModule],
+  imports: [RouterLink, Spinner, TableModule, ButtonModule],
   templateUrl: './news-index-page.html',
   styleUrl: './news-index-page.scss',
 })
