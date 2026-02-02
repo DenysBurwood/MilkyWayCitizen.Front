@@ -1,13 +1,15 @@
-<a routerLink="/">Home</a>
-<a routerLink="/news">News</a>
-@if (!isConnected())
-{
-    <!-- <button class="btn btn-outline-primary" routerLink="/login">Login</button> -->
-    <p-button label="Login" routerLink="/login"/>
-    <p-button label="Register" routerLink="/register"/>
-}
-@else
-{
-    <a routerLink="/user/my-profile">Profil</a>
-    <p-button label="Logout" (click)="logout()"/>
-}
+<div class="nav-bar">
+    <a class="home" routerLink="/">Home</a>
+    <a routerLink="/news">News</a>
+    @if (!isConnected())
+    {
+        <!-- <button class="btn btn-outline-primary" routerLink="/login">Login</button> -->
+        <p-button label="Login" routerLink="/login"/>
+        <p-button label="Register" routerLink="/register"/>
+    }
+    @else
+    {
+        <a routerLink="/user/my-profile">Profil</a>
+        <p-button label="Logout" (click)="logout()" size="small"/>
+    }
+</div>
