@@ -26,7 +26,7 @@
 <p>Text préambule</p>
 
   <!-- <p-toast /> -->
-        <div class="card flex justify-center">
+        <div class="card flex justify-center form">
             <form [formGroup]="newsGroup" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
                 <div class="flex flex-col gap-1">
                     <input pInputText type="text" id="title" placeholder="Titre" formControlName="title" [invalid]="isInvalid('title')" />
@@ -54,11 +54,23 @@
                         <p-message severity="error" size="small" variant="simple">Title is required.</p-message>
                     }
                 </div>
-                <div class="flex flex-col gap-1">
-                    <input pInputText type="text" id="tags" placeholder="Étiquettes" formControlName="tags" [invalid]="isInvalid('tags')" />
-                    @if (isInvalid('tags')) {
-                        <p-message severity="error" size="small" variant="simple">Title is required.</p-message>
-                    }
+                <div>
+                    <!-- <div class="flex flex-col gap-1">
+                        <input pInputText type="text" id="tags" placeholder="Étiquettes" formControlName="tags" />
+                    </div> -->
+                    @if (pluralTags)
+                    {
+                        <div formArrayName="tags">
+                            @for (tag of tags.controls; track tag; let i=$index) 
+                            {
+                                <div [formGroupName]="i">
+                                    <input pInputText type="text" id="tag-{{ i }}" placeholder="Étiquettes" formControlName="name" />
+                                    <p-button label="Retirer étiquette" (onClick)="deleteTag(i)"/>
+                                </div>
+                            }
+                        </div>
+                        }
+                    <p-button label="Ajouter étiquette" (onClick)="addTag()"/>
                 </div>
                 <button pButton severity="secondary" type="submit"><span pButtonLabel>Submit</span></button>
             </form>

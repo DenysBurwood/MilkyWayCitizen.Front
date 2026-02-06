@@ -1,7 +1,16 @@
+@import "primeicons/primeicons.css";
 .form
 {
     border: 2px solid orange;
     background-color: yellow;
     margin: 0 25px;
     padding: auto 25px;
+}
+
+.filter
+{
+    max-width: 60%;
+    margin: 15px auto;
+    display: flexbox;
+    align-content:space-evenly;
 }
