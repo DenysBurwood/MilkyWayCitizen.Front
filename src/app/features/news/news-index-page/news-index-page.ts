@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ChipModule } from 'primeng/chip';
 import { FormsModule } from '@angular/forms';
+import { indexNewsPageMax } from '@core/models/news/news-index-page-max.response';
 
 @Component({
   selector: 'app-news-index-page',
@@ -29,17 +30,18 @@ export class NewsIndexPage implements OnInit
     lastPage:boolean=true;
     pageMax:number=1;
     filter: boolean=false;
-    tagListlength: number=0;
     tagList: string[]=[];
     tagElement: string="";
 
     //newsListPromise!: Promise<HttpResourceRef<indexNews[] | undefined>>;
     newsList!: indexNews[];
+    newsListPageNumber: indexNewsPageMax|null=null;
     newsListSignal:Signal<indexNews[]|undefined>|null=null;
     async ngOnInit()//: Promise<void> 
     {
-        this.newsList = (await this._news.getNewsIndex())//.value;
-        this.pageMax = await this._news.numberPageMax(this.pageSize(), this.tagList);
+        this.newsListPageNumber = (await this._news.getNewsIndex())//.value;
+        this.newsList=this.newsListPageNumber.news
+        this.pageMax = this.newsListPageNumber.pageMax;
         if (this.pageNumber()>1)
         {
             this.firstPage=false;
@@ -62,8 +64,9 @@ export class NewsIndexPage implements OnInit
     async changePageSize(size: number)
     {
         this.pageSize.set(size);
-        this.newsList = ((await this._news.getNewsIndex(undefined, this.pageSize(), this.tagList))/*.value*/);
-        this.pageMax = await this._news.numberPageMax(this.pageSize(), this.tagList);
+        this.newsListPageNumber = ((await this._news.getNewsIndex(undefined, this.pageSize(), this.tagList))/*.value*/);
+        this.newsList=this.newsListPageNumber.news;
+        this.pageMax = this.newsListPageNumber.pageMax;
         this.pageNumber.set(0);
         this.firstPage=true;
         this.lastPage=false;
@@ -79,7 +82,9 @@ export class NewsIndexPage implements OnInit
         if (this.pageNumber()>0)
         {
             this.pageNumber.set(this.pageNumber()-1);
-            this.newsList = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+            this.newsListPageNumber = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+            this.newsList=this.newsListPageNumber.news;
+            this.newPageSize=this.newsListPageNumber.pageMax;
             this.lastPage=false;
         }
         if (this.pageNumber()>0)
@@ -97,7 +102,9 @@ export class NewsIndexPage implements OnInit
         if (this.pageNumber()<this.pageMax-1)
         {
             this.pageNumber.set(this.pageNumber()+1);
-            this.newsList = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+            this.newsListPageNumber = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+            this.newsList=this.newsListPageNumber.news;
+            this.newPageNumber=this.newsListPageNumber.pageMax;
             this.firstPage=false;
         }
         if (this.pageNumber()<this.pageMax-1)
@@ -121,7 +128,9 @@ export class NewsIndexPage implements OnInit
                 if (keyboard.target.value%1==0)
                 {
                     this.pageNumber.set(keyboard.target.value-1);
-                    this.newsList = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+                    this.newsListPageNumber = ((await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList))/*.value*/);
+                    this.newsList=this.newsListPageNumber.news;
+                    this.newPageNumber=this.newsListPageNumber.pageMax;
                 }
             }
             else
@@ -130,29 +139,17 @@ export class NewsIndexPage implements OnInit
             }
         }        
     }
-
-    addFilter()
-    {
-        this.tagListlength++;
-        this.tagList.length=this.tagListlength;
-        this.filter=true;
-    }
     addTag()
     {
         this.tagList.push(this.tagElement);
         this.tagElement="";
     }
 
-    removeFilter(index:number)
+    removeTag(index:number)
     {
-        this.tagListlength--;
-        console.log(this.tagList);
         this.tagList.splice(index, 1);
-        console.log(this.tagList);
-        
-        if (this.tagListlength<=0)
+        if (this.tagList.length==0)
         {
-            this.tagListlength=0;
             this.filter=false;
         }
     }
@@ -161,8 +158,11 @@ export class NewsIndexPage implements OnInit
     {
         console.log(this.tagList);
         
-        this.newsList = await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList);   
-        this.pageMax = await this._news.numberPageMax(this.pageSize(), this.tagList);
+        this.newsListPageNumber = await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList);   
+        this.newsList = this.newsListPageNumber.news;
+        this.pageMax = this.newsListPageNumber.pageMax;
+        this.goToPage(1);
+
         
     }
 }

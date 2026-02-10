@@ -68,7 +68,6 @@ export class NewsCreatePage
                 tags:tempArray
             };
 
-            
             this._news.createNews(newArticle).then(() => console.log(newArticle.publishDate));
             this._router.navigate(["/", "news"]);
             //console.log(newArticle.publishDate);
@@ -119,4 +118,5 @@ export class NewsCreatePage
             this.pluralTags=false;
         }
     }
+
 }

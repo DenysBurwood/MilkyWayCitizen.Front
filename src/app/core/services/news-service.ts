@@ -2,6 +2,7 @@ import { HttpClient, HttpParams, httpResource, HttpResourceRef, HttpResponse } f
 import { inject, Injectable, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CreateNews, indexNews, NewsDetails } from '@core/models';
+import { indexNewsPageMax } from '@core/models/news/news-index-page-max.response';
 import { environment } from '@env';
 import { firstValueFrom } from 'rxjs';
 
@@ -47,7 +48,7 @@ export class NewsService// implements OnChanges
         //const temp2 = httpResource.arrayBuffer<indexNews[]>(() => ({url: environment.apiUrl+"News/index", method: "GET", params: params}))
         //return httpResource<indexNews[]>(() => ({ url: environment.apiUrl + "News/index",params:{pageSize: 3,pageNumber: 1}}))
         //return temp2;
-        return firstValueFrom(this._http.get<indexNews[]>(environment.apiUrl + "News/index",  { params } ));
+        return firstValueFrom(this._http.get<indexNewsPageMax>(environment.apiUrl + "News/index",  { params } ));
     }
     async getNewsDetails(id:number)
         {
