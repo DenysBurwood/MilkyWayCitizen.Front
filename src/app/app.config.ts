@@ -7,13 +7,14 @@ import { spinnerInterceptor } from '@core/interceptors/spinner.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Nora from '@primeuix/themes/aura';
+import { tokenRefresherInterceptor } from '@core/interceptors/token-refresher-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor, spinnerInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, spinnerInterceptor, tokenRefresherInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

@@ -31,6 +31,7 @@ export class NewsIndexPage implements OnInit
     filter: boolean=false;
     tagListlength: number=0;
     tagList: string[]=[];
+    tagElement: string="";
 
     //newsListPromise!: Promise<HttpResourceRef<indexNews[] | undefined>>;
     newsList!: indexNews[];
@@ -136,12 +137,19 @@ export class NewsIndexPage implements OnInit
         this.tagList.length=this.tagListlength;
         this.filter=true;
     }
+    addTag()
+    {
+        this.tagList.push(this.tagElement);
+        this.tagElement="";
+    }
 
     removeFilter(index:number)
     {
         this.tagListlength--;
+        console.log(this.tagList);
         this.tagList.splice(index, 1);
-        //this.tagList.length=this.tagListlength;
+        console.log(this.tagList);
+        
         if (this.tagListlength<=0)
         {
             this.tagListlength=0;
@@ -151,7 +159,10 @@ export class NewsIndexPage implements OnInit
 
     async sendFilterRequest()
     {
+        console.log(this.tagList);
+        
         this.newsList = await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList);
         this.pageMax = await this._news.numberPageMax(this.pageSize(), this.tagList);
+        
     }
 }

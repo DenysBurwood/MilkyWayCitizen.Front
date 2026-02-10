@@ -9,37 +9,29 @@
 }
 @else
 {
-    <!-- @for(news of newsList; track $index)
-    {
-        <div>
-            <p>Titre : {{ news.title }}</p>
-            <p>Description : {{ news.description }}</p>
-            <p>Étiquettes : {{ news.tags }}</p>
-            <p>id : {{ news.id }}</p>
-            <button (click)="goToNewsDetails(news.id)">Lire l'article</button>
-        </div>
-    } -->
     <div class="filter">
         <div>
+            <label for="newsNumber" style="color: pink;">Nombre d'article par page : </label>
             <input [(ngModel)]="newPageSize" type="number" id="PS">
             <p-button (onClick)="changePageSize(newPageSize)">Valider</p-button>
         </div>
         <div class="justify-center">
-            <p>p-chips</p>
-            @if(filter)
+            @if(tagList.length>0)
             {
+                <div class="chips">
+                    <p>Étiquettes sélectionnées : </p>
                 @for(tag of tagList; track $index)
-                {
-                    <!-- <div>
-                        <p-chip [label]="tagList[$index]" removable="true" (onRemove)="removeFilter($index)"/>
-                    </div> -->
-                    <div>
-                        <input type="text" id="$index" name="tag" [(ngModel)]="tagList[$index]">
-                        <p-button label="Retirer étiquette" (onClick)="removeFilter($index)" severity="warn"/>
-                    </div>
-                }
+                        {
+                            <p-chip [label]="tagList[$index]" removable="true" (onRemove)="removeFilter($index)"/>
+                        }
+                </div>
             }
-            <p-button label="Ajouter étiquette" (onClick)="addFilter()" severity="info"/>
+                    <div>
+                        <input type="text" id="$index" name="tag" [(ngModel)]="tagElement">
+                        <p-button label="Valider étiquette" (onClick)="addTag()" severity="warn"/>
+                    </div>
+                        <!-- <p-button label="Retirer étiquette" (onClick)="removeFilter($index)" severity="warn"/> -->
+            <!-- <p-button label="Ajouter étiquette" (onClick)="addFilter()" severity="info"/> -->
             @if (filter)
             {
                 <p-button label="Valider" (onClick)="sendFilterRequest()"/>
