@@ -28,11 +28,12 @@
             }
                     <div>
                         <input type="text" id="$index" name="tag" [(ngModel)]="tagElement">
-                        <p-button label="Valider étiquette" (onClick)="addTag()" severity="warn"/>
+                        <p-button label="Ajouter étiquette" (onClick)="addTag()" severity="warn"/>
                     </div>
+
                         <!-- <p-button label="Retirer étiquette" (onClick)="removeFilter($index)" severity="warn"/> -->
             <!-- <p-button label="Ajouter étiquette" (onClick)="addFilter()" severity="info"/> -->
-            @if (filter)
+            @if (tagList.length>0)
             {
                 <p-button label="Valider" (onClick)="sendFilterRequest()"/>
             }

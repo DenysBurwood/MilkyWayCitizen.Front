@@ -161,7 +161,7 @@ export class NewsIndexPage implements OnInit
     {
         console.log(this.tagList);
         
-        this.newsList = await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList);
+        this.newsList = await this._news.getNewsIndex(this.pageNumber(), this.pageSize(), this.tagList);   
         this.pageMax = await this._news.numberPageMax(this.pageSize(), this.tagList);
         
     }

@@ -59,7 +59,15 @@ export class NewsService// implements OnChanges
     }
     async numberPageMax(pageSize:number, tags:string[]|null)
     {
-        const params=new HttpParams().set("pageSize", pageSize);
+        let params=null;
+        if (tags!=null)
+        {
+            params=new HttpParams().set("pageSize", pageSize).appendAll({"tags": tags});
+        }
+        else
+        {
+            params=new HttpParams().set("pageSize", pageSize);
+        }
         return Math.ceil(await firstValueFrom(this._http.get<number>(environment.apiUrl + "News/pageNumberMax", { params }))/pageSize);
     }
 }
