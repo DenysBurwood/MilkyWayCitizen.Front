@@ -13,6 +13,8 @@
     margin: 15px auto;
     display: flexbox;
     align-content:space-evenly;
+    border: 2px solid orange;
+    padding: 3px 5px;
 }
 
 .chips
@@ -20,4 +22,8 @@
     background-color: bisque;
     padding: 6px 11px;
     margin: 8px 0;
+}
+label
+{
+    color: pink;
 }

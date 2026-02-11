@@ -1,5 +1,6 @@
 <p>register-page works!</p>
-
+            <p-toast />
+            <p-button type="button" pRipple (click)="showError()" label="Info" severity="info" autofocus="false" />
 <div class="card flex justify-center">
     <h3>Inscrivez-vous sur notre site en remplissant ce formulaire.</h3>
     <p>Cliquez <a routerLink="/login">ici</a> si vous êtes déjà inscrits.</p>
@@ -50,7 +51,7 @@
             <p-inputgroup-addon>
                 Mot de passe : 
             </p-inputgroup-addon>
-            <p-password pInputPassword [feedback]="false" autocomplete="off" formControlName="password" [invalid]="isInvalid('password')" />
+            <p-password pInputPassword [feedback]="true" autocomplete="off" formControlName="password" [invalid]="isInvalid('password')" />
         </p-inputgroup>
     </div>
         <div>

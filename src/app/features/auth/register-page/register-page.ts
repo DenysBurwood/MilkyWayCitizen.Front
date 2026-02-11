@@ -8,10 +8,26 @@ import { PasswordModule } from "primeng/password";
 import { DatePickerModule } from 'primeng/datepicker';
 import { MessageModule } from "primeng/message";
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register-page',
-  imports: [ReactiveFormsModule, InputGroup, FormsModule, InputGroupAddon, PasswordModule, DatePickerModule, RouterLink, MessageModule, InputTextModule],
+  imports: [
+                ReactiveFormsModule, 
+                InputGroup, 
+                FormsModule, 
+                InputGroupAddon, 
+                PasswordModule, 
+                DatePickerModule, 
+                RouterLink, 
+                MessageModule, 
+                InputTextModule, 
+                ButtonModule,
+                ToastModule
+            ],
+  providers:[MessageService],
   templateUrl: './register-page.html',
   styleUrl: './register-page.scss',
 })
@@ -20,6 +36,8 @@ export class RegisterPage
     private readonly _fb = inject(FormBuilder);
     private readonly _router = inject (Router);
     private readonly _auth = inject(AuthService);
+
+    private messageService = inject(MessageService);
 
     userName = new FormControl('', [Validators.required]);
     firstName = new FormControl('', [Validators.required]);
@@ -45,11 +63,11 @@ export class RegisterPage
         city: this.city,
         country: this.country,
     });
-     onSubmit()
+    async onSubmit()
     {
         if(this.registerForm.valid)
         {
-            this._auth.register(
+            await this._auth.register(
             {
                 userName: this.registerForm.value.userName!,
                 firstName: this.registerForm.value.firstName!,
@@ -61,17 +79,9 @@ export class RegisterPage
                 streetNumber: this.registerForm.value.streetNumber!,
                 city: this.registerForm.value.city!,
                 country: this.registerForm.value.country!,
-            })/*.then(() => 
-            {
-                }).catch((err) => 
-                {
-                    console.error(err);
-                    
-                    })*/
+            })
            this._router.navigate(["/", "login"]);
-            
-            
-            
+ 
         }
         //console.log(this.registerForm.value.birthDate?.toJSON());
     }
@@ -82,5 +92,12 @@ export class RegisterPage
         //console.log(control?.invalid);
         
         return control?.invalid && (control.touched/* || this.formSubmitted*/);
+    }
+
+
+
+
+        showError() {
+        this.messageService.add({ severity: 'info', summary: 'Info', detail: this._auth.authError() });
     }
 }

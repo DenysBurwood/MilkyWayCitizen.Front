@@ -11,7 +11,7 @@
 {
     <div class="filter">
         <div>
-            <label for="newsNumber" style="color: pink;">Nombre d'article par page : </label>
+            <label for="newsNumber" >Nombre d'article par page : </label>
             <input [(ngModel)]="newPageSize" type="number" id="PS">
             <p-button (onClick)="changePageSize(newPageSize)">Valider</p-button>
         </div>
@@ -27,6 +27,7 @@
                 </div>
             }
                     <div>
+                        <label>Filtre par tag préféré : </label>
                         <input type="text" id="$index" name="tag" [(ngModel)]="tagElement">
                         <p-button label="Ajouter étiquette" (onClick)="addTag()" severity="warn"/>
                     </div>
